@@ -23,7 +23,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.content_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -32,7 +32,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Item item = itemArrayList.get(position);
 
-        holder.textView.setText(item.getName());
+        holder.text_name.setText(item.getName());
+        holder.text_email.setText(item.getEmail());
     }
 
     @Override
@@ -42,12 +43,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView textView;
+        private TextView text_name;
+        private TextView text_email;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            textView = (TextView) itemView.findViewById(R.id.text_name);
+            text_name = (TextView) itemView.findViewById(R.id.txt_name);
+            text_email = (TextView) itemView.findViewById(R.id.txt_email);
         }
     }
 }
