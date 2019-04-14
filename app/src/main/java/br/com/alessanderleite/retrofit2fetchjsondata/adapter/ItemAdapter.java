@@ -1,4 +1,4 @@
-package br.com.alessanderleite.retrofit2fetchjsondata;
+package br.com.alessanderleite.retrofit2fetchjsondata.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -9,11 +9,14 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
+import br.com.alessanderleite.retrofit2fetchjsondata.model.Item;
+import br.com.alessanderleite.retrofit2fetchjsondata.R;
+
+public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     ArrayList<Item> itemArrayList;
 
-    public Adapter(ArrayList<Item> itemArrayList) {
+    public ItemAdapter(ArrayList<Item> itemArrayList) {
         this.itemArrayList = itemArrayList;
     }
 

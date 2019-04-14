@@ -1,4 +1,4 @@
-package br.com.alessanderleite.retrofit2fetchjsondata;
+package br.com.alessanderleite.retrofit2fetchjsondata.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,10 +6,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.alessanderleite.retrofit2fetchjsondata.adapter.ItemAdapter;
+import br.com.alessanderleite.retrofit2fetchjsondata.network.Api;
+import br.com.alessanderleite.retrofit2fetchjsondata.model.Item;
+import br.com.alessanderleite.retrofit2fetchjsondata.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -66,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             mRecyclerView.setHasFixedSize(true);
             mLayoutManager = new LinearLayoutManager(MainActivity.this);
             mRecyclerView.setLayoutManager(mLayoutManager);
-            mAdapter = new Adapter((ArrayList<Item>) itemList);
+            mAdapter = new ItemAdapter((ArrayList<Item>) itemList);
             mRecyclerView.setAdapter(mAdapter);
         }
     }

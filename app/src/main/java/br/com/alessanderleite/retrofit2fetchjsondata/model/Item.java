@@ -1,4 +1,4 @@
-package br.com.alessanderleite.retrofit2fetchjsondata;
+package br.com.alessanderleite.retrofit2fetchjsondata.model;
 
 public class Item {
 
