@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private List<Item> itemList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,26 +41,32 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<Item>>() {
             @Override
             public void onResponse(Call<List<Item>> call, Response<List<Item>> response) {
-                List<Item> itemList = response.body();
+                itemList = response.body();
                 String[] items = new String[itemList.size()];
                 for (int i = 0; i < itemList.size(); i++) {
                     items[i] = itemList.get(i).getName();
                 }
 
-                mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-                mRecyclerView.setHasFixedSize(true);
-                mLayoutManager = new LinearLayoutManager(MainActivity.this);
-                mRecyclerView.setLayoutManager(mLayoutManager);
-                mAdapter = new Adapter((ArrayList<Item>) itemList);
-                mRecyclerView.setAdapter(mAdapter);
+                setUpAdapterView();
             }
 
 
 
             @Override
             public void onFailure(Call<List<Item>> call, Throwable t) {
-
+                
             }
         });
+    }
+
+    public void setUpAdapterView() {
+        if (itemList != null) {
+            mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+            mRecyclerView.setHasFixedSize(true);
+            mLayoutManager = new LinearLayoutManager(MainActivity.this);
+            mRecyclerView.setLayoutManager(mLayoutManager);
+            mAdapter = new Adapter((ArrayList<Item>) itemList);
+            mRecyclerView.setAdapter(mAdapter);
+        }
     }
 }
