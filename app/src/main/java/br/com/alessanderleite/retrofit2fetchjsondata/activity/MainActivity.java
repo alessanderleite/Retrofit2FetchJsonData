@@ -17,8 +17,6 @@ import br.com.alessanderleite.retrofit2fetchjsondata.network.RetrofitInstance;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,11 +34,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getItemsApi() {
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl(Api.BASE_URL)
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-
         Api api = RetrofitInstance.getRetrofitInstance().create(Api.class);
 
         Call<List<Item>> call = api.getItems();
@@ -52,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 for (int i = 0; i < itemList.size(); i++) {
                     items[i] = itemList.get(i).getName();
                 }
+
                 generateItemList();
             }
 
