@@ -8,8 +8,6 @@ import retrofit2.http.GET;
 
 public interface Api {
 
-    String BASE_URL = "https://jsonplaceholder.typicode.com/";
-
     @GET("posts/1/comments")
     Call<List<Item>> getItems();
 }
