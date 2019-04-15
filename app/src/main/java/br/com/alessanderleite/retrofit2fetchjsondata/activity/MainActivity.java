@@ -13,6 +13,7 @@ import br.com.alessanderleite.retrofit2fetchjsondata.adapter.ItemAdapter;
 import br.com.alessanderleite.retrofit2fetchjsondata.network.Api;
 import br.com.alessanderleite.retrofit2fetchjsondata.model.Item;
 import br.com.alessanderleite.retrofit2fetchjsondata.R;
+import br.com.alessanderleite.retrofit2fetchjsondata.network.RetrofitInstance;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,12 +36,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getItemsApi() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Api.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(Api.BASE_URL)
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
 
-        Api api = retrofit.create(Api.class);
+        Api api = RetrofitInstance.getRetrofitInstance().create(Api.class);
+
         Call<List<Item>> call = api.getItems();
         call.enqueue(new Callback<List<Item>>() {
             @Override
@@ -50,11 +52,8 @@ public class MainActivity extends AppCompatActivity {
                 for (int i = 0; i < itemList.size(); i++) {
                     items[i] = itemList.get(i).getName();
                 }
-
-                setUpAdapterView();
+                generateItemList();
             }
-
-
 
             @Override
             public void onFailure(Call<List<Item>> call, Throwable t) {
@@ -63,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void setUpAdapterView() {
+    public void generateItemList() {
         if (itemList != null) {
             mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
             mRecyclerView.setHasFixedSize(true);
