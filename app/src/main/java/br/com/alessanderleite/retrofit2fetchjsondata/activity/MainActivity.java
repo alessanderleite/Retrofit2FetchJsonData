@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -34,26 +35,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getItemsApi() {
-        Api api = RetrofitInstance.getRetrofitInstance().create(Api.class);
+        try {
+            Api api = RetrofitInstance.getRetrofitInstance().create(Api.class);
 
-        Call<List<Item>> call = api.getItems();
-        call.enqueue(new Callback<List<Item>>() {
-            @Override
-            public void onResponse(Call<List<Item>> call, Response<List<Item>> response) {
-                itemList = response.body();
-                String[] items = new String[itemList.size()];
-                for (int i = 0; i < itemList.size(); i++) {
-                    items[i] = itemList.get(i).getName();
+            Call<List<Item>> call = api.getItems();
+            call.enqueue(new Callback<List<Item>>() {
+                @Override
+                public void onResponse(Call<List<Item>> call, Response<List<Item>> response) {
+                    itemList = response.body();
+                    String[] items = new String[itemList.size()];
+                    for (int i = 0; i < itemList.size(); i++) {
+                        items[i] = itemList.get(i).getName();
+                    }
+
+                    generateItemList();
                 }
 
-                generateItemList();
-            }
-
-            @Override
-            public void onFailure(Call<List<Item>> call, Throwable t) {
-                Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onFailure(Call<List<Item>> call, Throwable t) {
+                    Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } catch (Exception e) {
+            Log.e("Error", e.getMessage());
+            Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void generateItemList() {
