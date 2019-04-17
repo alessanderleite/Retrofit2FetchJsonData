@@ -15,12 +15,12 @@ public class Item {
 
     @SerializedName("html_url")
     @Expose
-    private String html_url;
+    private String htmlUrl;
 
-    public Item(String login, String avatarUrl, String html_url) {
+    public Item(String login, String avatarUrl, String htmlUrl) {
         this.login = login;
         this.avatarUrl = avatarUrl;
-        this.html_url = html_url;
+        this.htmlUrl = htmlUrl;
     }
 
     public String getLogin() {
@@ -39,11 +39,11 @@ public class Item {
         this.avatarUrl = avatarUrl;
     }
 
-    public String getHtml_url() {
-        return html_url;
+    public String getHtmlUrl() {
+        return htmlUrl;
     }
 
-    public void setHtml_url(String html_url) {
-        this.html_url = html_url;
+    public void setHtmlUrl(String htmlUrl) {
+        this.htmlUrl = htmlUrl;
     }
 }
