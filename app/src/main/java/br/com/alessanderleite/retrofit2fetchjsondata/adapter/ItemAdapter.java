@@ -1,6 +1,7 @@
 package br.com.alessanderleite.retrofit2fetchjsondata.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,13 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-import br.com.alessanderleite.retrofit2fetchjsondata.model.Item;
 import br.com.alessanderleite.retrofit2fetchjsondata.R;
+import br.com.alessanderleite.retrofit2fetchjsondata.activity.DetailActivity;
+import br.com.alessanderleite.retrofit2fetchjsondata.model.Item;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
@@ -28,8 +31,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_item, parent, false);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_item, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -63,6 +66,19 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             txtLogin = (TextView) itemView.findViewById(R.id.txt_login);
             txtHtmlUrl = (TextView) itemView.findViewById(R.id.txt_html_url);
             imageView = (ImageView) itemView.findViewById(R.id.img_avatar);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        Item clickedDataItem = itemArrayList.get(position);
+                        Intent intent = new Intent(context, DetailActivity.class);
+                        context.startActivity(intent);
+                        Toast.makeText(v.getContext(), "You clicked " + clickedDataItem.getLogin(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         }
     }
 }
