@@ -55,13 +55,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getItemList(ArrayList<Item> itemArrayList) {
-        if (itemArrayList != null) {
-            mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+            mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
             mRecyclerView.setHasFixedSize(true);
             mLayoutManager = new LinearLayoutManager(MainActivity.this);
             mRecyclerView.setLayoutManager(mLayoutManager);
             mAdapter = new ItemAdapter(itemArrayList,this);
             mRecyclerView.setAdapter(mAdapter);
-        }
+
     }
 }
