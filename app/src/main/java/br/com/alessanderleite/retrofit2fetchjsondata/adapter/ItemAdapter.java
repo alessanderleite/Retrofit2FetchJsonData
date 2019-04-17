@@ -1,11 +1,15 @@
 package br.com.alessanderleite.retrofit2fetchjsondata.adapter;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -14,10 +18,12 @@ import br.com.alessanderleite.retrofit2fetchjsondata.R;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
-    ArrayList<Item> itemArrayList;
+    private ArrayList<Item> itemArrayList;
+    private Context context;
 
-    public ItemAdapter(ArrayList<Item> itemArrayList) {
+    public ItemAdapter(ArrayList<Item> itemArrayList, Context context) {
         this.itemArrayList = itemArrayList;
+        this.context = context;
     }
 
     @NonNull
@@ -30,27 +36,33 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Item item = itemArrayList.get(position);
+        Item item = this.itemArrayList.get(position);
 
-        holder.text_name.setText(item.getName());
-        holder.text_email.setText(item.getEmail());
+        holder.txtLogin.setText(item.getLogin());
+        holder.txtHtmlUrl.setText(item.getHtmlUrl());
+
+        Glide.with(context)
+                .load(item.getAvatarUrl())
+                .into(holder.imageView);
     }
 
     @Override
     public int getItemCount() {
-        return itemArrayList.size();
+        return this.itemArrayList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView text_name;
-        private TextView text_email;
+        private TextView txtLogin;
+        private TextView txtHtmlUrl;
+        private ImageView imageView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            text_name = (TextView) itemView.findViewById(R.id.txt_name);
-            text_email = (TextView) itemView.findViewById(R.id.txt_email);
+            txtLogin = (TextView) itemView.findViewById(R.id.txt_login);
+            txtHtmlUrl = (TextView) itemView.findViewById(R.id.txt_html_url);
+            imageView = (ImageView) itemView.findViewById(R.id.img_avatar);
         }
     }
 }
