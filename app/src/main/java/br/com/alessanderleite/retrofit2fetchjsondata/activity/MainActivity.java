@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.alessanderleite.retrofit2fetchjsondata.adapter.ItemAdapter;
-import br.com.alessanderleite.retrofit2fetchjsondata.network.Api;
+import br.com.alessanderleite.retrofit2fetchjsondata.api.Service;
 import br.com.alessanderleite.retrofit2fetchjsondata.model.Item;
 import br.com.alessanderleite.retrofit2fetchjsondata.R;
-import br.com.alessanderleite.retrofit2fetchjsondata.network.RetrofitInstance;
+import br.com.alessanderleite.retrofit2fetchjsondata.api.Client;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private List<Item> itemList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void getItemsApi() {
         try {
-            Api api = RetrofitInstance.getRetrofitInstance().create(Api.class);
+            Service api = Client.getRetrofitInstance().create(Service.class);
 
             Call<List<Item>> call = api.getItems();
             call.enqueue(new Callback<List<Item>>() {
@@ -62,13 +61,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void generateItemList() {
-        if (itemList != null) {
+    public void generateItemList(ArrayList<Item> items) {
+        if (items != null) {
             mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
             mRecyclerView.setHasFixedSize(true);
             mLayoutManager = new LinearLayoutManager(MainActivity.this);
             mRecyclerView.setLayoutManager(mLayoutManager);
-            mAdapter = new ItemAdapter((ArrayList<Item>) itemList);
+            mAdapter = new ItemAdapter(items);
             mRecyclerView.setAdapter(mAdapter);
         }
     }

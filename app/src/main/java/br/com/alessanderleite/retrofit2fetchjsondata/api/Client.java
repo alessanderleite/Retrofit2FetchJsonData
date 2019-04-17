@@ -1,9 +1,9 @@
-package br.com.alessanderleite.retrofit2fetchjsondata.network;
+package br.com.alessanderleite.retrofit2fetchjsondata.api;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitInstance {
+public class Client {
 
     private static Retrofit retrofit;
     public static final String BASE_URL = "https://jsonplaceholder.typicode.com/";
