@@ -60,7 +60,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         private TextView txtHtmlUrl;
         private ImageView imageView;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull final View itemView) {
             super(itemView);
 
             txtLogin = (TextView) itemView.findViewById(R.id.txt_login);
@@ -74,6 +74,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                     if (position != RecyclerView.NO_POSITION) {
                         Item clickedDataItem = itemArrayList.get(position);
                         Intent intent = new Intent(context, DetailActivity.class);
+                        intent.putExtra("login", itemArrayList.get(position).getLogin());
+                        intent.putExtra("html_url", itemArrayList.get(position).getHtmlUrl());
+                        intent.putExtra("avatar_url", itemArrayList.get(position).getAvatarUrl());
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent);
                         Toast.makeText(v.getContext(), "You clicked " + clickedDataItem.getLogin(), Toast.LENGTH_SHORT).show();
                     }
