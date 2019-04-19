@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -44,7 +45,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         holder.txtLogin.setText(item.getLogin());
         holder.txtHtmlUrl.setText(item.getHtmlUrl());
 
-        Glide.with(context)
+        Picasso.get()
                 .load(item.getAvatarUrl())
                 .into(holder.imageView);
     }
