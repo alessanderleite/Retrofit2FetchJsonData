@@ -21,10 +21,13 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+        initViews();
+    }
+
+    private void initViews() {
         mUsername = (TextView) findViewById(R.id.username);
         mLink = (TextView) findViewById(R.id.link);
         mAvatarUrl = (ImageView) findViewById(R.id.user_image_header);
-
 
         String username = getIntent().getExtras().getString("login");
         String link = getIntent().getExtras().getString("html_url");
