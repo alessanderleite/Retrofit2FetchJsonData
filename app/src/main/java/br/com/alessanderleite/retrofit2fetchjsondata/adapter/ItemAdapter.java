@@ -16,7 +16,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import br.com.alessanderleite.retrofit2fetchjsondata.R;
-import br.com.alessanderleite.retrofit2fetchjsondata.activity.DetailActivity;
+import br.com.alessanderleite.retrofit2fetchjsondata.controller.DetailActivity;
 import br.com.alessanderleite.retrofit2fetchjsondata.model.Item;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {

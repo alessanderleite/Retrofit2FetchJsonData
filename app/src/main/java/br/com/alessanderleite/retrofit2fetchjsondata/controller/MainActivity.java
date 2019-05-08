@@ -1,4 +1,4 @@
-package br.com.alessanderleite.retrofit2fetchjsondata.activity;
+package br.com.alessanderleite.retrofit2fetchjsondata.controller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
